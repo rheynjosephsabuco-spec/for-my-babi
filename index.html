@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Love Story </title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at 20% 20%, #ff4f9a 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, #ff176f 0%, transparent 30%),
+        linear-gradient(135deg, #17000c, #3b001d, #18000d);
+    overflow-x: hidden;
+}
+
+/* FLOATING HEARTS */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.heart {
+    position: absolute;
+    color: #ff6fae;
+    animation: float 8s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-20vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* NAVIGATION */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    padding: 18px;
+
+    background: rgba(45, 0, 20, 0.8);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 150, 200, 0.15);
+}
+
+nav a {
+    color: #ffd6e7;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff69aa;
+    text-shadow: 0 0 15px #ff69aa;
+}
+
+/* SECTIONS */
+
+section {
+    min-height: 100vh;
+    padding: 110px 7% 70px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-title {
+    color: #ff9dcc;
+    font-size: 34px;
+    margin-bottom: 35px;
+    text-align: center;
+
+    text-shadow:
+        0 0 10px #ff4f9a,
+        0 0 30px rgba(255, 79, 154, 0.5);
+}
+
+/* HOME */
+
+#home {
+    text-align: center;
+}
+
+.welcome {
+    font-size: clamp(38px, 7vw, 62px);
+    color: #ff9dcc;
+    margin-bottom: 25px;
+
+    text-shadow:
+        0 0 15px #ff4f9a,
+        0 0 35px rgba(255, 79, 154, 0.5);
+}
+
+.welcome span {
+    color: #ff4f91;
+}
+
+.intro {
+    max-width: 700px;
+    color: #ffe5ef;
+    line-height: 1.8;
+}
+
+.quote {
+    max-width: 650px;
+    margin-top: 45px;
+
+    color: #ffc9df;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.forever {
+    margin-top: 30px;
+    color: #ff9dcc;
+}
+
+.scroll-btn {
+    margin-top: 40px;
+
+    padding: 14px 28px;
+
+    border: 1px solid #ff69a9;
+    border-radius: 30px;
+
+    color: white;
+    text-decoration: none;
+
+    background: rgba(255, 80, 160, 0.12);
+
+    transition: 0.3s;
+}
+
+.scroll-btn:hover {
+    background: #ff3f91;
+
+    box-shadow:
+        0 0 15px #ff3f91,
+        0 0 35px rgba(255, 63, 145, 0.6);
+
+    transform: scale(1.05);
+}
+
+/* MEMORIES */
+
+.memory-grid {
+    width: 100%;
+    max-width: 950px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.memory-card {
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background: rgba(255, 100, 170, 0.08);
+
+    border: 1px solid rgba(255, 150, 200, 0.15);
+
+    transition: 0.4s;
+}
+
+.memory-card:hover {
+    transform: translateY(-8px) scale(1.02);
+
+    box-shadow:
+        0 15px 40px rgba(255, 0, 120, 0.3);
+}
+
+.memory-card img {
+    width: 100%;
+    height: 260px;
+
+    object-fit: cover;
+    display: block;
+}
+
+.memory-card p {
+    padding: 15px;
+
+    text-align: center;
+
+    color: #ffd8e8;
+}
+
+/* GALLERY */
+
+.gallery {
+    width: 100%;
+    max-width: 1000px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 220px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    border: 1px solid rgba(255, 150, 200, 0.15);
+
+    transition: 0.4s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 0 25px rgba(255, 50, 150, 0.5);
+}
+
+/* MESSAGE */
+
+.letter {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 40px;
+
+    border-radius: 16px;
+
+    background: rgba(255, 100, 170, 0.08);
+
+    border: 1px solid rgba(255, 150, 200, 0.18);
+
+    box-shadow:
+        0 0 40px rgba(255, 30, 130, 0.15);
+
+    line-height: 1.9;
+
+    color: #ffe1ed;
+}
+
+.letter h3 {
+    text-align: center;
+
+    color: #ff91c4;
+
+    font-size: 28px;
+
+    margin-bottom: 25px;
+}
+
+.letter p {
+    margin-bottom: 16px;
+}
+
+.signature {
+    text-align: right;
+
+    color: #ff83bb;
+
+    font-weight: bold;
+
+    margin-top: 25px;
+}
+
+/* 100 REASONS */
+
+.reasons-container {
+    width: 100%;
+    max-width: 950px;
+}
+
+.reason {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 12px;
+
+    padding: 17px 20px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 100, 170, 0.06);
+
+    border: 1px solid rgba(255, 150, 200, 0.08);
+
+    transition: 0.3s;
+}
+
+.reason:hover {
+    transform: translateX(7px);
+
+    background: rgba(255, 70, 150, 0.15);
+
+    border-color: rgba(255, 100, 180, 0.3);
+
+    box-shadow:
+        0 0 20px rgba(255, 50, 150, 0.15);
+}
+
+.number {
+    min-width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #ff69a9,
+        #ff176f
+    );
+
+    font-weight: bold;
+
+    box-shadow:
+        0 0 15px rgba(255, 20, 120, 0.4);
+}
+
+.reason-text {
+    color: #ffe2ed;
+
+    line-height: 1.5;
+}
+
+/* MUSIC BUTTON */
+
+.music-btn {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 58px;
+    height: 58px;
+
+    border: none;
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff69a9,
+            #ff176f
+        );
+
+    color: white;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    z-index: 2000;
+
+    box-shadow:
+        0 0 20px rgba(255, 20, 120, 0.5);
+}
+
+/* FOOTER */
+
+footer {
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: #c99bad;
+
+    background: rgba(0, 0, 0, 0.2);
+}
+
+footer span {
+    color: #ff5c9f;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    nav {
+        gap: 12px;
+        padding: 15px 7px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    section {
+        padding: 100px 5% 60px;
+    }
+
+    .memory-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .memory-card img {
+        height: 190px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery img {
+        height: 180px;
+    }
+
+    .letter {
+        padding: 25px;
+    }
+
+    .reason {
+        padding: 14px;
+    }
+
+    .reason-text {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING HEARTS -->
+<div class="hearts" id="hearts"></div>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#memories">Memories</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#message">Message</a>
+    <a href="#reasons">Reasons</a>
+</nav>
+
+
+<!-- HOME -->
+
+<section id="home">
+
+    <h1 class="welcome">
+        HIIII BABYYYY
+    </h1>
+
+    <p class="intro">
+       I made this website for you because I wanted to leave a little piece of us somewhere we can always come back to. Every photo, every word, and every little detail carries a memory I never want to lose. It may be simple, but I made it with the kind of love that grows quietly through every moment we share. I hope whenever you visit it, you’ll see more than just a website. you’ll see how beautiful our story has been to me, and how much I cherish having you in it.
+    </p>
+
+    <p class="quote">
+        "Love isn't about how many days or months you've been together.
+        It's about how much you love each other every single day." 
+    </p>
+
+    <p class="forever">
+        Forever begins, wherever you are.
+    </p>
+
+    <a href="#memories" class="scroll-btn">
+        Explore Our Memories ↓
+    </a>
+
+</section>
+
+
+<!-- MEMORIES -->
+
+<section id="memories">
+
+    <h2 class="section-title">
+        JUST US BEING US
+    </h2>
+
+    <div class="memory-grid">
+
+        <div class="memory-card">
+            <img src="1.jpg">
+            <p></p>
+        </div>
+
+        <div class="memory-card">
+            <img src="2.jpg">
+            <p></p>
+        </div>
+
+        <div class="memory-card">
+            <img src="3.jpg">
+            <p></p>
+        </div>
+
+        <div class="memory-card">
+            <img src="4.jpg">
+            <p></p>
+        </div>
+
+        <div class="memory-card">
+            <img src="5.jpg">
+            <p></p>
+        </div>
+
+        <div class="memory-card">
+            <img src="6.jpg">
+            <p./p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section id="gallery">
+
+    <h2 class="section-title">
+        MY FAVORITE VIEW HAS ALWAYS BEEN YOU
+    </h2>
+
+    <div class="gallery">
+
+        <img src="7.jpg">
+        <img src="8.jpg">
+        <img src="9.jpg">
+        <img src="10.jpg">
+        <img src="11.jpg">
+        <img src="12.jpg">
+        <img src="13.jpg">
+        <img src="14.jpg">
+        <img src="15.jpg">
+        <img src="16.jpg">
+        <img src="17.jpg">
+        <img src="18.jpg">
+    
+    </div>
+
+</section>
+
+
+<!-- MESSAGE -->
+
+<section id="message">
+
+    <h2 class="section-title">
+        IF MY HEART COULD SPEAK
+    </h2>
+
+    <div class="letter">
+
+        <h3>
+            I hope you read this slowly.
+        </h3>
+
+        <p> Sometimes I wonder how someone can quietly become such a big part of your life without you even noticing when it happened. Then I think of you, and I realize it happened little by little through every conversation, every laugh, every small moment, and every day I got to know another side of you.
+           
+    
+        </p>I don't love you only for the beautiful moments. I love the ordinary ones too, the random talks, the little misunderstandings we eventually fix, the days when we have nothing special planned but somehow being with you still feels like enough. Those moments may look small to everyone else, but to me, they’re pieces of a life I never want to forget.
+
+        <p
+        
+           
+    ></p>I know I’m not always the easiest person to love. I can be stubborn, I can make mistakes, and sometimes I don’t realize right away when I’ve hurt you. But please believe me when I say that I’m always trying to become someone who deserves the love you give me. I don’t want to simply say I love you, I want my actions to make you feel it.
+            
+
+                      
+    .
+
+        <p>
+            
+        </p> If someday you look back at us, I hope you don’t only remember how much we loved each other. I hope you remember how we kept finding our way back to each other, even after difficult days. I hope you remember that there was someone who saw you, not just the happy version, not just the beautiful moments, but you as a whole and still thought, “I’d choose her again.”
+      I can’t promise that every day ahead will be easy. But I can promise that the memories we make will matter to me. I want to know the future versions of you. I want to see your dreams slowly become real, celebrate the things you’re proud of, listen when life gets heavy, and be there for the little victories nobody else notices.
+           
+        </p> And if life ever gets loud enough that you forget how loved you are, come back to this: you were never just a chapter in my life. You became part of the story I hope I’ll still be grateful for years from now.
+                      
+    .
+
+        <p>THANK YOU FOR BEING YOU. THANK YOU FOR LETTING ME LOVE YOU.
+            
+
+        <p>
+           I'II PROMISE THAT I'II CONTINUE LEARNING HOW TO LOVE YOU BETTER EVERY SINGLE DAY.
+        </p>
+
+        <p>
+            
+        </p>
+
+        <p>
+            
+        </p>
+
+        <div class="signature">
+        forever yours,forever us.<p.
+            
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- 100 REASONS -->
+
+<section id="reasons">
+
+    <h2 class="section-title">
+        100 Reasons Why I Love You 
+    </h2>
+
+    <div class="reasons-container" id="reasonsList"></div>
+
+</section>
+
+
+<!-- MUSIC -->
+
+<audio id="music" loop>
+    <source src="music about you.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()" id="musicButton">
+    🎵
+</button>
+
+
+<footer>
+    Made with  especially for you.
+    <br>
+    Forever and always <span></span>
+</footer>
+
+
+<script>
+
+/* ==============================
+   100 REASONS
+================================ */
+
+const reasons = [
+
+"Because you make my ordinary days feel special.",
+"Because your smile can instantly make me happy.",
+"Because you always manage to make me laugh.",
+"Because I love the way you look at me.",
+"Because you make me feel loved.",
+"Because I can be myself around you.",
+"Because you listen to me.",
+"Because you understand me even when I can't explain myself.",
+"Because you care about the little things.",
+"Because your happiness matters to me.",
+
+"Because you are beautiful inside and out.",
+"Because you make my heart feel warm.",
+"Because I love talking to you.",
+"Because I never get tired of hearing your voice.",
+"Because you make boring conversations interesting.",
+"Because you make me excited about the future.",
+"Because you make me want to become a better person.",
+"Because you believe in me.",
+"Because you support me.",
+"Because you never stop being you.",
+
+"Because your laugh is one of my favorite sounds.",
+"Because your eyes are beautiful.",
+"Because your personality is amazing.",
+"Because you are someone I can trust.",
+"Because I feel safe with you.",
+"Because you make me feel understood.",
+"Because you make me feel important.",
+"Because you remember little things about me.",
+"Because you know how to cheer me up.",
+"Because you make my problems feel smaller.",
+
+"Because I love spending time with you.",
+"Because even doing nothing with you feels special.",
+"Because I love our random conversations.",
+"Because I love our inside jokes.",
+"Because I love the memories we have created.",
+"Because I want to create many more memories with you.",
+"Because you make every moment memorable.",
+"Because you bring happiness into my life.",
+"Because you make my heart beat faster.",
+"Because you make me smile without trying.",
+
+"Because you are patient with me.",
+"Because you forgive me when I make mistakes.",
+"Because you encourage me.",
+"Because you remind me that I am capable.",
+"Because you care about my feelings.",
+"Because you respect me.",
+"Because you accept my imperfections.",
+"Because you don't expect me to be perfect.",
+"Because you see the good in me.",
+"Because you stay even when things get difficult.",
+
+"Because you make me feel lucky.",
+"Because meeting you changed my life.",
+"Because you became such an important part of my life.",
+"Because I love how comfortable we are together.",
+"Because I love our little moments.",
+"Because I love seeing you happy.",
+"Because your happiness makes me happy.",
+"Because I love making you smile.",
+"Because I love surprising you.",
+"Because I love taking care of you.",
+
+"Because you make me feel special.",
+"Because you make me feel appreciated.",
+"Because you remind me what love feels like.",
+"Because you inspire me.",
+"Because you motivate me.",
+"Because you make me hopeful.",
+"Because you make my future feel brighter.",
+"Because I want you in my future.",
+"Because I want to grow with you.",
+"Because I want to experience life with you.",
+
+"Because I love your little habits.",
+"Because I love your random messages.",
+"Because I love when you get excited about something.",
+"Because I love hearing about your day.",
+"Because I love knowing what makes you happy.",
+"Because I love learning more about you.",
+"Because there is always something new to discover about you.",
+"Because you never stop surprising me.",
+"Because you make every month together meaningful.",
+"Because nine months with you still doesn't feel like enough.",
+
+"Because you are my favorite person to talk to.",
+"Because you are the person I want to tell everything to.",
+"Because you are the person I think about throughout the day.",
+"Because you make me look forward to tomorrow.",
+"Because you make me appreciate today.",
+"Because I love remembering our first moments together.",
+"Because I love watching our relationship grow.",
+"Because we have overcome difficult moments together.",
+"Because we keep choosing each other.",
+"Because our story means so much to me.",
+
+"Because I don't just love the good days with you.",
+"Because I want to be there on your difficult days too.",
+"Because I want to support your dreams.",
+"Because I want to see you succeed.",
+"Because I want to celebrate your achievements.",
+"Because I want to comfort you when you're sad.",
+"Because I want to make you proud.",
+"Because I want to keep making memories with you.",
+"Because I want more months and years with you.",
+"Because after everything, I still choose you. "
+
+];
+
+
+/* CREATE REASONS */
+
+const reasonsList = document.getElementById("reasonsList");
+
+reasons.forEach((reason, index) => {
+
+    const item = document.createElement("div");
+
+    item.className = "reason";
+
+    item.innerHTML = `
+        <div class="number">${index + 1}</div>
+        <div class="reason-text">${reason}</div>
+    `;
+
+    reasonsList.appendChild(item);
+
+});
+
+
+/* FLOATING HEARTS */
+
+const heartsContainer =
+    document.getElementById("hearts");
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML =
+        ["❤️","💕","💗","💖","💘"]
+        [Math.floor(Math.random() * 5)];
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+    heart.style.fontSize =
+        12 + Math.random() * 18 + "px";
+
+    heart.style.animationDuration =
+        6 + Math.random() * 8 + "s";
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 15000);
+}
+
+setInterval(createHeart, 500);
+
+
+/* MUSIC */
+
+const music =
+    document.getElementById("music");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+let playing = false;
+
+function toggleMusic() {
+
+    if (playing) {
+
+        music.pause();
+
+        musicButton.innerHTML = "🎵";
+
+        playing = false;
+
+    } else {
+
+        music.play().catch(() => {
+
+            alert(
+                "Put a song named music.mp3 beside your index.html file."
+            );
+
+        });
+
+        musicButton.innerHTML = "⏸️";
+
+        playing = true;
+    }
+}
+
+
+/* GALLERY FULLSCREEN */
+
+document
+.querySelectorAll(".gallery img")
+.forEach(img => {
+
+    img.addEventListener("click", () => {
+
+        const overlay =
+            document.createElement("div");
+
+        overlay.style.position = "fixed";
+        overlay.style.inset = "0";
+        overlay.style.background =
+            "rgba(20,0,10,.95)";
+
+        overlay.style.display = "flex";
+        overlay.style.alignItems = "center";
+        overlay.style.justifyContent = "center";
+
+        overlay.style.zIndex = "5000";
+
+        const image =
+            document.createElement("img");
+
+        image.src = img.src;
+
+        image.style.maxWidth = "90%";
+        image.style.maxHeight = "90%";
+        image.style.borderRadius = "15px";
+
+        image.style.boxShadow =
+            "0 0 50px rgba(255,70,170,.6)";
+
+        overlay.appendChild(image);
+
+        document.body.appendChild(overlay);
+
+        overlay.onclick = () => {
+            overlay.remove();
+        };
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
